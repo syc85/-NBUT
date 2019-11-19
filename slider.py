@@ -1,8 +1,7 @@
 """
 This code is used to adjust some key parameters related to
 red ball and yellow stick detection in golf task.
-@author: Meringue
-@date: 2018/10/15
+NBUT SYC HK YZN
 """
 
 import cv2
