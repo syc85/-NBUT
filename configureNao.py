@@ -1,8 +1,3 @@
-"""
-basic class for all Nao tasks.
-@author: Meringue
-@date: 2018/1/15
-"""
 
 import sys
 #sys.path.append("/home/meringue/Softwares/pynaoqi-sdk/") #naoqi directory
