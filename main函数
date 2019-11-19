@@ -1,0 +1,221 @@
+"""
+some test codes for Nao golf visual part.
+@author: Meringue
+@date: 2018/1/15
+"""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+import numpy as np
+import cv2
+import time
+import os
+import sys
+
+#sys.path.append("/home/meringue/Softwares/pynaoqi-sdk/") #naoqi directory
+sys.path.append("./")
+
+from visualTask import *
+from naoqi import ALProxy
+import vision_definitions as vd
+import math
+IP = "172.20.10.5"
+
+
+#IP = "169.254.67.213"
+#IP = "169.254.143.164"
+
+visualBasis = VisualBasis(IP,cameraId=0, resolution=vd.kVGA)
+ballDetect = BallDetect(IP, resolution=vd.kVGA, writeFrame=True)
+#stickDetect = StickDetect(IP, cameraId=0, resolution=vd.kVGA, writeFrame=True)
+#landMarkDetect = LandMarkDetect(IP)
+
+# test code
+"""
+visualBasis.updateFrame()
+visualBasis.showFrame()
+visualBasis.printFrameData()
+cv2.waitKey(1000)
+"""
+"""
+# posture initialization
+motionProxy = ALProxy("ALMotion", IP, 9559)
+postureProxy = ALProxy("ALRobotPosture", IP, 9559)
+motionProxy.wakeUp()
+postureProxy.goToPosture("StandInit", 0.5)
+"""
+
+#visualBasis.motionProxy.wakeUp()
+#visualBasis.postureProxy.goToPosture("StandInit", 0.5)
+#
+# Xa=0
+# for i in range(5):
+#    ballDetect.updateBallData(client="xxxx", colorSpace="HSV", fitting=True)
+#    print(ballDetect.getBallInfoInImage())
+#    while (time2-time1)>5000:
+#       ballDetect.showBallPosition()
+
+
+
+ballDetect.ystart()
+ballDetect.YY()
+ballDetect.XX()
+
+#while(i):
+while ballDetect.getBallPositionX()==0 and ballDetect.getBallPositionY()==0:
+	time1 = time.time()
+	ballDetect.updateBallData(client="xxxx", colorSpace="HSV", fitting=True)
+	print(ballDetect.getBallInfoInImage())
+	time2 = time.time()
+	ballDetect.showBallPosition()
+	cv2.waitKey(1000)
+print("first")
+ballDetect.mymove()
+ballDetect.Headditou()
+
+ballDetect.YY()
+ballDetect.XX()
+#ballDetect.Headditou1()
+while ballDetect.getBallPositionX()==0 and ballDetect.getBallPositionY()==0:
+	time1 = time.time()
+	ballDetect.updateBallData(client="xxxx", colorSpace="HSV", fitting=True)
+	print(ballDetect.getBallInfoInImage())
+	time2 = time.time()
+	ballDetect.showBallPosition()
+	cv2.waitKey(1000)
+print("first")
+ballDetect.mymove()
+
+
+ballDetect.YY()
+ballDetect.XX()
+ballDetect.Headditou1()
+while ballDetect.getBallPositionX()==0 and ballDetect.getBallPositionY()==0:
+	ballDetect.updateBallData(client="xxxx", colorSpace="HSV", fitting=True,minHSV1=np.array([0,0,0]),
+                       maxHSV1=np.array([180,255,46]))
+	print(ballDetect.getBallInfoInImage())
+	ballDetect.showBallPosition()
+	cv2.waitKey(1000)
+print("hei")
+blackballX = ballDetect.getBallPositionX()
+blackballY = ballDetect.getBallPositionY()
+
+ballDetect.YY()
+ballDetect.XX()
+while ballDetect.getBallPositionX()==0 and ballDetect.getBallPositionY()==0:
+	ballDetect.updateBallData(client="xxxx", colorSpace="HSV", fitting=True)
+	print(ballDetect.getBallInfoInImage())
+	ballDetect.showBallPosition()
+	cv2.waitKey(1000)
+print("bai")
+
+whiteX = ballDetect.getBallPositionY()
+whiteY = ballDetect.getBallPositionY()
+
+while(abs(whiteY-blackballY) > 0.03 ):
+    if(whiteY>blackballY):
+        ballDetect.moveweitiaozheng()
+       # ballDetect.Headweizheng()
+    if(whiteY<blackballY):
+        ballDetect.moveweitiaofu()
+      #  ballDetect.Headweizheng()
+    ballDetect.YY()
+    ballDetect.XX()
+    while ballDetect.getBallPositionX() == 0 and ballDetect.getBallPositionY() == 0:
+        ballDetect.updateBallData(client="xxxx", colorSpace="HSV", fitting=True, minHSV1=np.array([0,0,0]),
+                                  maxHSV1=np.array([180,255,46]))
+        print(ballDetect.getBallInfoInImage())
+        ballDetect.showBallPosition()
+        cv2.waitKey(1000)
+    blackballX = ballDetect.getBallPositionX()
+    blackballY = ballDetect.getBallPositionY()
+
+    ballDetect.YY()
+    ballDetect.XX()
+    while ballDetect.getBallPositionX() == 0 and ballDetect.getBallPositionY() == 0:
+        ballDetect.updateBallData(client="xxxx", colorSpace="HSV", fitting=True, minHSV1=np.array([20, 50, 50]),
+                                  maxHSV1=np.array([55, 255, 255]))
+        print(ballDetect.getBallInfoInImage())
+        ballDetect.showBallPosition()
+        cv2.waitKey(1000)
+
+    whiteX = ballDetect.getBallPositionY()
+    whiteY = ballDetect.getBallPositionY()
+
+
+ballDetect.YY()
+ballDetect.XX()
+ballDetect.Headditou()
+while ballDetect.getBallPositionX()==0 and ballDetect.getBallPositionY()==0:
+    time1 = time.time()
+    ballDetect.updateBallData(client="xxxx", colorSpace="HSV", fitting=True)
+    print(ballDetect.getBallInfoInImage())
+    time2 = time.time()
+    ballDetect.showBallPosition()
+    cv2.waitKey(1000)
+
+ballDetect.moveda()
+ballDetect.zhuan()
+ballDetect.shoubi()
+# ballDetect.ystart()
+
+"""
+while 1:
+	stickDetect.updateStickData(client="xxx")
+	stickDetect.showStickPosition()
+	cv2.waitKey(1000)
+"""
+
+
+"""
+while 1:
+	landMarkDetect.updateLandMarkData(client="xxx")
+	landMarkDetect.showLandMarkData()
+	time.sleep(1)
+"""
+
+"""
+print "start collecting..."
+for i in range(10):
+	imgName = "stick_" + str(i+127) + ".jpg"
+	imgDir = os.path.join("stick_images", imgName)
+	visualBasis.updateFrame()
+	visualBasis.showFrame(timeMs=1000)
+	visualBasis.saveFrame(imgDir)
+	print "saved in ", imgDir
+	time.sleep(5)
+"""
+
+"""
+visualBasis._tts.say("hello world")
+"""
+
+"""
+visualBasis._motionProxy.wakeUp()
+"""
+
+"""
+dataList = visualBasis._memoryProxy.getDataList("camera")
+print dataList
+"""
+
+"""
+visualBasis._motionProxy.setStiffnesses("Body", 1.0)
+visualBasis._motionProxy.moveInit()
+"""
+
+#motionProxy = ALProxy("ALMotion", IP, 9559)
+#postureProxy = ALProxy("ALRobotPosture", IP, 9559)
+
+#motionProxy.wakeUp()
+#postureProxy.goToPosture("StandInit", 0.5)
+
+
+#motionProxy.wakeUp()
+#motionProxy.goToPosture("StandInit", 0.5)
+#motionProxy.moveToward(0.1, 0.1, 0, [["Frequency", 1.0]])
+#motionProxy.moveTo(0.3, 0.2, 0)
+"""
+"""
