@@ -1,8 +1,6 @@
-# coding: utf-8
 """
-visual classes for Nao golf task.
-@author: Meringue
-@date: 2018/1/15
+made by 沈杨成 洪凯 俞珍妮
+宁波工程学院
 """
 
 from __future__ import absolute_import
